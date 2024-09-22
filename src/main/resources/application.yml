@@ -1,0 +1,6 @@
+server:
+  port: 9092
+
+# Maximum number of concurrent screenshot requests
+screenshot:
+  max-concurrent-requests: 10
