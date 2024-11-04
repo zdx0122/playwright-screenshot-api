@@ -40,20 +40,21 @@ public class ScreenshotService {
         // 异步执行截图任务，提交到线程池
         return CompletableFuture.supplyAsync(() -> {
             // 创建一个新的页面
-            Page page = browser.newPage();
-            page.navigate(url);
+            try(Page page = browser.newPage();) {
+                page.navigate(url);
 
-            page.waitForLoadState(NETWORKIDLE);
+                page.waitForLoadState(NETWORKIDLE);
 
-            String modifiedUrl = url.replaceAll("https?://", "");
-            // 生成截图文件
-            Path screenshotPath = Paths.get("screenshot-" + modifiedUrl + "-"+ System.currentTimeMillis() + ".png");
-            page.screenshot(new Page.ScreenshotOptions().setPath(screenshotPath));
+                String modifiedUrl = url.replaceAll("https?://", "");
+                // 生成截图文件
+                Path screenshotPath = Paths.get("screenshot-" + modifiedUrl + "-"+ System.currentTimeMillis() + ".png");
+                page.screenshot(new Page.ScreenshotOptions().setPath(screenshotPath));
 
-            // 关闭页面
-            page.close();
+                // 关闭页面
+                page.close();
 
-            return screenshotPath.toFile();
+                return screenshotPath.toFile();
+            }
         }, executorService);
     }
 
