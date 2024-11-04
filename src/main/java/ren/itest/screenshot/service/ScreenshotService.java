@@ -25,12 +25,6 @@ public class ScreenshotService {
     private int maxConcurrentRequests;
 
     public ScreenshotService() {
-//        System.out.println("maxConcurrentRequests数值为：" + maxConcurrentRequests);
-//        // 验证 maxConcurrentRequests 是否为正数，如果小于 1 则设置为 1
-//        if (maxConcurrentRequests < 1) {
-//            throw new IllegalArgumentException("maxConcurrentRequests must be at least 1");
-//        }
-
         // 创建一个固定大小的线程池，用于限制并发截图请求的数量
         this.executorService = Executors.newFixedThreadPool(10);
     }
