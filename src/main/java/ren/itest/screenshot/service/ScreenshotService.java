@@ -48,7 +48,7 @@ public class ScreenshotService {
                 String modifiedUrl = url.replaceAll("https?://", "");
                 // 生成截图文件
                 Path screenshotPath = Paths.get("screenshot-" + modifiedUrl + "-"+ System.currentTimeMillis() + ".png");
-                page.screenshot(new Page.ScreenshotOptions().setPath(screenshotPath));
+                page.screenshot(new Page.ScreenshotOptions().setPath(screenshotPath).setFullPage(true));
 
                 // 关闭页面
                 page.close();
