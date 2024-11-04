@@ -65,14 +65,25 @@ public class ScreenshotService {
 
     @PreDestroy
     public void cleanup() {
-        // 关闭浏览器和 Playwright
-        if (browser != null) {
-            browser.close();
+        try {
+            // 关闭浏览器
+            if (browser != null) {
+                browser.close();
+            }
+            // 关闭 Playwright
+            if (playwright != null) {
+                playwright.close();
+            }
+        } finally {
+            // 关闭线程池
+            executorService.shutdown();
+            try {
+                if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                    executorService.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                executorService.shutdownNow();
+            }
         }
-        if (playwright != null) {
-            playwright.close();
-        }
-        // 关闭线程池
-        executorService.shutdown();
     }
 }
