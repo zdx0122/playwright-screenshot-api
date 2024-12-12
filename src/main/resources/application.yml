@@ -10,9 +10,9 @@ cloudflare:
     access-key:
     secret-key:
     bucket-name:
-    endpoint:
+    endpoint: https://xxxxxx.r2.cloudflarestorage.com
     region: auto
-    domain:
+    domain: pub-xxxxxx.r2.dev
 
 
 # site domain，填写域名或者IP+端口

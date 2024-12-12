@@ -156,10 +156,10 @@ public class ScreenshotService {
 
         s3Client.putObject(putObjectRequest, screenshotPath);
 
-        logger.info("Uploaded screenshot to R2: " + r2Domain + "/" + r2BucketName + "/" + objectKey);
+        logger.info("Uploaded screenshot to R2: " + r2Domain + "/" + objectKey);
 
         // Return the URL of the uploaded object
-        return String.format("%s/%s/%s", r2Domain, r2BucketName, objectKey);
+        return String.format("%s/%s", r2Domain, objectKey);
     }
 
     public Page.ScreenshotOptions setScreenshotOptions(Path screenshotPath,String format, Boolean fullPage, Integer quality){
